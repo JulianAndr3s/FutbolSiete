@@ -1,12 +1,20 @@
 plugins {
 	id 'org.springframework.boot' version '2.3.4.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'jacoco'
 	id 'java'
+	id "org.sonarqube" version "2.7"
 }
 
 group = 'com.ceiba.adn'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+
+sonarqube{
+	properties {
+		property "sonar.sourceEncoding", "UTF-8"
+	}
+}
 
 configurations {
 	compileOnly {
@@ -17,14 +25,18 @@ configurations {
 repositories {
 	mavenCentral()
 }
-
+apply plugin: 'java'
+apply plugin: 'jacoco'
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
+	testCompile 'junit:junit:4.12'
+	testCompile group: 'org.mockito', name: 'mockito-core', version: '2.1.0'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
@@ -32,4 +44,16 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+	dependsOn 'cleanTest'
+}
+
+sonarqube {
+	properties {
+		property "sonar.sources", "src/main/java"
+		property "sonar.java.binaries", "build/classes/java/main"
+		property "sonar.tests", "src/test/java"
+		property "sonar.test.binaries", "build/classes/java/test"
+		property "sonar.jacoco.reportPaths", "build/jacoco/test.exec"
+		property "sonar.junit.reportPaths", "build/test-results/test"
+	}
 }
