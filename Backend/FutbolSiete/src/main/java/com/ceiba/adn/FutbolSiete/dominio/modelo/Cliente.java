@@ -1,6 +1,13 @@
 package com.ceiba.adn.FutbolSiete.dominio.modelo;
 
+import com.ceiba.adn.FutbolSiete.dominio.validaciones.ValidarArgumento;
+
 public class Cliente {
+
+    private static final String SE_DEBE_INGRESAR_EL_NOMBRE_DE_LA_PERSONA = "Se debe ingresar el nombre de la persona";
+    private static final String SE_DEBE_INGRESAR_EL_APELLIDO_DE_LA_PERSONA = "Se debe ingresar el apellido de la persona";
+    private static final String SE_DEBE_INGRESAR_EL_TELEFONO_DE_LA_PERSONA = "Se debe ingresar el telefono de la persona";
+    private static final String SE_DEBE_INGRESAR_LA_CEDULA_DE_LA_PERSONA = "Se debe ingresar la cedula de la persona";
 
     private Long id;
     private String nombre;
@@ -10,6 +17,19 @@ public class Cliente {
     private String cedula;
 
     public Cliente(Long id, String nombre, String apellido, String telefono, String correo, String cedula) {
+
+        ValidarArgumento.validarObligatorio(nombre,SE_DEBE_INGRESAR_EL_NOMBRE_DE_LA_PERSONA);
+        ValidarArgumento.validarNoVacio(nombre, SE_DEBE_INGRESAR_EL_NOMBRE_DE_LA_PERSONA);
+
+        ValidarArgumento.validarObligatorio(apellido,SE_DEBE_INGRESAR_EL_APELLIDO_DE_LA_PERSONA);
+        ValidarArgumento.validarNoVacio(apellido, SE_DEBE_INGRESAR_EL_APELLIDO_DE_LA_PERSONA);
+
+        ValidarArgumento.validarObligatorio(telefono,SE_DEBE_INGRESAR_EL_TELEFONO_DE_LA_PERSONA);
+        ValidarArgumento.validarNoVacio(telefono,SE_DEBE_INGRESAR_EL_TELEFONO_DE_LA_PERSONA);
+
+        ValidarArgumento.validarObligatorio(cedula,SE_DEBE_INGRESAR_LA_CEDULA_DE_LA_PERSONA);
+        ValidarArgumento.validarNoVacio(cedula,SE_DEBE_INGRESAR_LA_CEDULA_DE_LA_PERSONA);
+
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
