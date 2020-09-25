@@ -9,4 +9,6 @@ import java.io.Serializable;
 @Repository
 public interface RepositorioClienteJpa extends JpaRepository<ClienteEntidad, Serializable> {
 
+    ClienteEntidad findByCedula(String cedula);
+
 }

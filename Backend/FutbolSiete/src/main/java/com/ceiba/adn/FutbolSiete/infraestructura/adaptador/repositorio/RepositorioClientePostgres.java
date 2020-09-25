@@ -7,6 +7,9 @@ import com.ceiba.adn.FutbolSiete.infraestructura.entidades.ClienteEntidad;
 import com.ceiba.adn.FutbolSiete.infraestructura.repositorioJpa.RepositorioClienteJpa;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Repository
 public class RepositorioClientePostgres implements RepositorioCliente {
 
@@ -22,5 +25,35 @@ public class RepositorioClientePostgres implements RepositorioCliente {
     public void crearCliente(Cliente cliente) {
         ClienteEntidad clienteEntidad = convertirCliente.convertirDominioPorEntidad(cliente);
         repositorioClienteJpa.save(clienteEntidad);
+    }
+
+    @Override
+    public void actualizarCliente(Cliente cliente) {
+        ClienteEntidad clienteEntidad = convertirCliente.convertirDominioPorEntidad(cliente);
+        repositorioClienteJpa.save(clienteEntidad);
+    }
+
+    @Override
+    public void eliminarCliente(Long id) {
+        repositorioClienteJpa.deleteById(id);
+    }
+
+    @Override
+    public List<Cliente> listarClientes() {
+        List<ClienteEntidad> listaClienteEntidad = repositorioClienteJpa.findAll();
+        List<Cliente> listaCliente= new ArrayList<>();
+        return convertirCliente.convertirListaClienteEntidadAListaCliente(listaClienteEntidad, listaCliente);
+    }
+
+    @Override
+    public Cliente buscarPorCedula(String cedula) {
+        ClienteEntidad clienteEntidad = repositorioClienteJpa.findByCedula(cedula);
+        return (clienteEntidad == null ? null : convertirCliente.convertirEntidadPorDominio(clienteEntidad));
+    }
+
+    @Override
+    public boolean existeCliente(Cliente cliente) {
+        String cedula = cliente.getCedula();
+        return (repositorioClienteJpa.findByCedula(cedula)) != null;
     }
 }

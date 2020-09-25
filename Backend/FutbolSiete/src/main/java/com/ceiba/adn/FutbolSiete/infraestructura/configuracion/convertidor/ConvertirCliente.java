@@ -5,6 +5,8 @@ import com.ceiba.adn.FutbolSiete.infraestructura.entidades.ClienteEntidad;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ConvertirCliente {
 
@@ -14,5 +16,16 @@ public class ConvertirCliente {
         return modelMapper.map(cliente, ClienteEntidad.class);
     }
 
+    public Cliente convertirEntidadPorDominio(ClienteEntidad clienteEntidad) {
+        return modelMapper.map(clienteEntidad, Cliente.class);
+    }
+
+    public List<Cliente> convertirListaClienteEntidadAListaCliente(List<ClienteEntidad> listaClienteEntidad, List<Cliente> listaCliente){
+        for(ClienteEntidad clienteEntidad: listaClienteEntidad) {
+            Cliente cliente = modelMapper.map(clienteEntidad, Cliente.class);
+            listaCliente.add(cliente);
+        }
+        return listaCliente;
+    }
 
 }

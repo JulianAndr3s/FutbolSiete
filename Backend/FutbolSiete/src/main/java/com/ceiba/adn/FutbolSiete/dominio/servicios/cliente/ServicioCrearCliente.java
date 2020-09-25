@@ -1,9 +1,12 @@
 package com.ceiba.adn.FutbolSiete.dominio.servicios.cliente;
 
+import com.ceiba.adn.FutbolSiete.dominio.excepcion.ExcepcionGeneral;
 import com.ceiba.adn.FutbolSiete.dominio.modelo.Cliente;
 import com.ceiba.adn.FutbolSiete.dominio.puerto.repositorio.RepositorioCliente;
 
 public class ServicioCrearCliente {
+
+    private static final String EL_CLIENTE_YA_EXISTE = "El cliente que intentas agregar ya existe";
 
     private RepositorioCliente repositorioCliente;
 
@@ -13,7 +16,11 @@ public class ServicioCrearCliente {
 
     public void ejecutar(Cliente cliente){
 
-        // Se hacen validaciones de existencia luego
-        this.repositorioCliente.crearCliente(cliente);
+        if (repositorioCliente.existeCliente(cliente)){
+            throw new ExcepcionGeneral(EL_CLIENTE_YA_EXISTE);
+        }
+        else {
+            this.repositorioCliente.crearCliente(cliente);
+        }
     }
 }
