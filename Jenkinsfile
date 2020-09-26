@@ -54,7 +54,7 @@ pipeline {
 	
 	dir("Backend/FutbolSiete"){
           //Construir sin tarea test que se ejecutó previamente
-           sh 'gradle build -x test'
+           sh 'gradle --b ./build.gradle build -x test'
 	}
 
       }
@@ -62,9 +62,12 @@ pipeline {
     
     stage('Tests') {
       steps {
-        echo "------------>Unit Tests<------------"
+        echo "------------>Cleaning previous compilations<------------"
 	dir("Backend/FutbolSiete"){
-        sh 'gradle test'
+        sh 'gradle --b ./build.gradle clean'
+		
+		echo "-----------> Unit Tests <-----------"
+		sh 'gradle --b ./build.gradle test jacocoTestReport'
 	}
       }
     }
@@ -88,8 +91,6 @@ pipeline {
     }
     failure {
       echo 'This will run only if failed'
-      mail (to: 'julian.botero@ceiba.com.co', subject: "Failed Pipeline:${currentBuild.fullDisplayName}",
-            body: "Something is wrong with ${env.BUILD_URL}")
     }
     unstable {
       echo 'This will run only if the run was marked as unstable'

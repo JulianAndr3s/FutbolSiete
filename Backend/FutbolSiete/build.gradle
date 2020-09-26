@@ -45,7 +45,7 @@ dependencies {
 
 test {
 	useJUnitPlatform()
-	dependsOn 'cleanTest'
+	// dependsOn 'cleanTest'
 }
 
 sonarqube {
@@ -54,7 +54,13 @@ sonarqube {
 		property "sonar.java.binaries", "build/classes/java/main"
 		property "sonar.tests", "src/test/java"
 		property "sonar.test.binaries", "build/classes/java/test"
-		property "sonar.jacoco.reportPaths", "build/jacoco/test.exec"
+		property "sonar.jacoco.reportPaths", "path/reports/jacoco/jacocoTestReport.xml"
 		property "sonar.junit.reportPaths", "build/test-results/test"
+	}
+}
+
+jacocoTestReport {
+	reports{
+		xml.enabled true
 	}
 }
