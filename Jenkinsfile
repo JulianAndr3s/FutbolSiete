@@ -4,11 +4,6 @@ pipeline {
     label 'Slave_Induccion'
   }
   
-  //Ejecutar automaticamente cada hora (Hay que configurar en Jenkins)
-  /*triggers {
-    pollSCM('@hourly')
-  }*/
-  
   //Opciones específicas de Pipeline dentro del Pipeline
   options {
     //Mantener artefactos y salida de consola para el # específico de ejecuciones recientes del Pipeline.
@@ -62,12 +57,10 @@ pipeline {
     
     stage('Tests') {
       steps {
-        echo "------------>Cleaning previous compilations<------------"
+        echo "------------>Unit Tests<------------"
 	dir("Backend/FutbolSiete"){
         sh 'gradle --b ./build.gradle clean'
-		
-		echo "-----------> Unit Tests <-----------"
-		sh 'gradle --b ./build.gradle test jacocoTestReport'
+        sh 'gradle --b ./build.gradle test jacocoTestReport'
 	}
       }
     }
@@ -76,7 +69,7 @@ pipeline {
       steps {
         echo '------------>Análisis de código estático<------------'
         withSonarQubeEnv('Sonar') {
-          sh "${tool name: 'SonarScanner',type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
+          sh "${tool name: 'SonarScanner',type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
           // sh 'gradle sonarqube'
         }
       }
