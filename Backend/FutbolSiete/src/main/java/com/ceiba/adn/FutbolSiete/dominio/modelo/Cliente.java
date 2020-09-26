@@ -8,6 +8,7 @@ public class Cliente {
     private static final String SE_DEBE_INGRESAR_EL_APELLIDO_DE_LA_PERSONA = "Se debe ingresar el apellido de la persona";
     private static final String SE_DEBE_INGRESAR_EL_TELEFONO_DE_LA_PERSONA = "Se debe ingresar el telefono de la persona";
     private static final String SE_DEBE_INGRESAR_LA_CEDULA_DE_LA_PERSONA = "Se debe ingresar la cedula de la persona";
+    private static final String SE_DEBE_INGRESAR_CORREO_VALIDO_DE_LA_PERSONA = "Se debe ingresar un correo correcto";
 
     private Long id;
     private String nombre;
@@ -26,6 +27,8 @@ public class Cliente {
 
         ValidarArgumento.validarObligatorio(telefono,SE_DEBE_INGRESAR_EL_TELEFONO_DE_LA_PERSONA);
         ValidarArgumento.validarNoVacio(telefono,SE_DEBE_INGRESAR_EL_TELEFONO_DE_LA_PERSONA);
+
+        ValidarArgumento.validarNoVacio(correo, SE_DEBE_INGRESAR_CORREO_VALIDO_DE_LA_PERSONA);
 
         ValidarArgumento.validarObligatorio(cedula,SE_DEBE_INGRESAR_LA_CEDULA_DE_LA_PERSONA);
         ValidarArgumento.validarNoVacio(cedula,SE_DEBE_INGRESAR_LA_CEDULA_DE_LA_PERSONA);
