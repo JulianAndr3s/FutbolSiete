@@ -21,6 +21,10 @@ public class ComandoCancha {
         return id;
     }
 
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
     public String getUbicacion() {
         return ubicacion;
     }
