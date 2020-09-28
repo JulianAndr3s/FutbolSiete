@@ -12,6 +12,6 @@ public class ServicioActualizarCancha {
     }
 
     public void ejecutar(Cancha cancha){
-        repositorioCancha.crearCancha(cancha);
+        repositorioCancha.actualizarCancha(cancha);
     }
 }

@@ -4,7 +4,7 @@ import com.ceiba.adn.futbolsiete.dominio.modelo.Cliente;
 import com.ceiba.adn.futbolsiete.dominio.puerto.repositorio.RepositorioCliente;
 import com.ceiba.adn.futbolsiete.infraestructura.configuracion.convertidor.ConvertirCliente;
 import com.ceiba.adn.futbolsiete.infraestructura.entidades.ClienteEntidad;
-import com.ceiba.adn.futbolsiete.infraestructura.repositorioJpa.RepositorioClienteJpa;
+import com.ceiba.adn.futbolsiete.infraestructura.repositoriojpa.RepositorioClienteJpa;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

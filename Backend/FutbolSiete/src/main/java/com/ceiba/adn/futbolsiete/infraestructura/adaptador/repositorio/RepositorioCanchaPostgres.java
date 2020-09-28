@@ -4,7 +4,7 @@ import com.ceiba.adn.futbolsiete.dominio.modelo.Cancha;
 import com.ceiba.adn.futbolsiete.dominio.puerto.repositorio.RepositorioCancha;
 import com.ceiba.adn.futbolsiete.infraestructura.configuracion.convertidor.ConvertirCancha;
 import com.ceiba.adn.futbolsiete.infraestructura.entidades.CanchaEntidad;
-import com.ceiba.adn.futbolsiete.infraestructura.repositorioJpa.RepositorioCanchaJpa;
+import com.ceiba.adn.futbolsiete.infraestructura.repositoriojpa.RepositorioCanchaJpa;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

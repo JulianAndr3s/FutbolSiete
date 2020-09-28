@@ -1,4 +1,4 @@
-package com.ceiba.adn.futbolsiete.infraestructura.repositorioJpa;
+package com.ceiba.adn.futbolsiete.infraestructura.repositoriojpa;
 
 import com.ceiba.adn.futbolsiete.infraestructura.entidades.ClienteEntidad;
 import org.springframework.data.jpa.repository.JpaRepository;
