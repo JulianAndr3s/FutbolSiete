@@ -38,9 +38,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testCompile 'junit:junit:4.12'
 	testCompile group: 'org.mockito', name: 'mockito-core', version: '2.1.0'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 test {
