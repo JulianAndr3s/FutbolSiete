@@ -8,7 +8,7 @@ plugins {
 
 group = 'com.ceiba.adn'
 version = '0.0.1-SNAPSHOT'
-// sourceCompatibility = '1.8'
+sourceCompatibility = '1.8'
 
 sonarqube{
 	properties {
@@ -21,15 +21,11 @@ configurations {
 	runtimeClasspath {
 		extendsFrom developmentOnly
 	}
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
 }
 
 repositories {
 	mavenCentral()
 }
-
 apply plugin: 'java'
 apply plugin: 'jacoco'
 
@@ -42,7 +38,7 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('junit:junit:4.12')
+	testCompile 'junit:junit:4.12'
 	testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.1.0'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
@@ -60,7 +56,13 @@ sonarqube {
 		property "sonar.java.binaries", "build/classes/java/main"
 		property "sonar.tests", "src/test/java"
 		property "sonar.test.binaries", "build/classes/java/test"
-		property "sonar.jacoco.reportPaths", "build/jacoco/test.exec"
+		property "sonar.jacoco.reportPaths", "path/reports/jacoco/jacocoTestReport.xml"
 		property "sonar.junit.reportPaths", "build/test-results/test"
+	}
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
 	}
 }
