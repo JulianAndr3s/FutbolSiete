@@ -3,7 +3,7 @@ pipeline {
   agent {
     label 'Slave_Induccion'
   }
-  
+
   //Opciones específicas de Pipeline dentro del Pipeline
   options {
     //Mantener artefactos y salida de consola para el # específico de ejecuciones recientes del Pipeline.
@@ -11,18 +11,11 @@ pipeline {
     //No permitir ejecuciones concurrentes de Pipeline
     disableConcurrentBuilds()
   }
-  
   //Una sección que define las herramientas para “autoinstalar” y poner en la PATH
   tools {
     jdk 'JDK8_Centos' //Preinstalada en la Configuración del Master
     gradle 'Gradle5.6_Centos' //Preinstalada en la Configuración del Master
   }
-  
-  //Se implementa el Jmeter
-   environment{
-    PROJETC_PATH_JMETER= '/opt/Apache/apache-jmeter-5.0/bin'
-	}
-  
   //Aquí comienzan los “items” del Pipeline
   stages {
     stage('Checkout') {
@@ -42,8 +35,7 @@ pipeline {
         ])
       }
     }
-	
-	stage('Compile & Unit Tests') {
+    stage('Compile & Unit Tests') {
               steps{
 
                  echo "------------>Cleaning previous compilations<------------"
@@ -51,19 +43,19 @@ pipeline {
                  sh 'gradle --b ./build.gradle clean'
 
                  echo "------------>Unit Tests<------------"
-                 sh 'gradle --b ./build.gradle test'
+                 sh 'gradle --b ./build.gradle test jacocoTestReport'
 		}
              }
         }
         stage('Static Code Analysis') {
-			steps{
-			echo '------------>Análisis de código estático<------------'
-			withSonarQubeEnv('Sonar') {
-			sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
-			}
-			}
-		}
-
+      		steps {
+        	echo '------------>Análisis de código estático<------------'
+        	withSonarQubeEnv('Sonar') {
+          	sh "${tool name: 'SonarScanner',type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
+          	// sh 'gradle sonarqube'
+        	}
+      	   }
+    	}
         stage('Build') {
               steps {
                     echo "------------>Build<------------"
@@ -74,22 +66,24 @@ pipeline {
               }
         }
   }
+
   post {
-    always {
-      echo 'This will always run'
-    }
-    success {
-      echo 'This will run only if successful'
-    }
-    failure {
-      echo 'This will run only if failed'
-    }
-    unstable {
-      echo 'This will run only if the run was marked as unstable'
-    }
-    changed {
-      echo 'This will run only if the state of the Pipeline has changed'
-      echo 'For example, if the Pipeline was previously failing but is now successful'
-    }
+        always {
+            echo 'This will always run'
+        }
+        success {
+            echo 'This will run only if successful'
+        }
+        failure {
+            echo 'This will run only if failed'
+
+        }
+        unstable {
+            echo 'This will run only if the run was marked as unstable'
+        }
+        changed {
+            echo 'This will run only if the state of the Pipeline has changed'
+            echo 'For example, if the Pipeline was previously failing but is now successful'
+        }
   }
 }

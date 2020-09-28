@@ -15,17 +15,15 @@ sonarqube {
 		property "sonar.sourceEncoding", "UTF-8"
 	}
 }
-
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
 	}
 }
-
 repositories {
 	mavenCentral()
 }
-
 apply plugin: 'java'
 apply plugin: 'jacoco'
 
@@ -39,7 +37,7 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testCompile 'junit:junit:4.12'
-	testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.1.0'
+	testCompile group: 'org.mockito', name: 'mockito-core', version: '2.1.0'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
@@ -47,6 +45,7 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+	dependsOn 'cleanTest'
 }
 
 sonarqube {
