@@ -47,7 +47,7 @@ pipeline {
               steps{
 
                  echo "------------>Cleaning previous compilations<------------"
-		dir("Backend/FutbolSiete"){ 
+		dir("Backend"){ 
                  sh 'gradle --b ./build.gradle clean'
 
                  echo "------------>Unit Tests<------------"
@@ -67,7 +67,7 @@ pipeline {
         stage('Build') {
               steps {
                     echo "------------>Build<------------"
-		dir("Backend/FutbolSiete"){ 
+		dir("Backend"){ 
                     //Construir sin tarea test que se ejecutó previamente
                     sh 'gradle --b ./build.gradle build -x test'
 		}
