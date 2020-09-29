@@ -19,7 +19,7 @@ public class CanchaEntidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cancha")
-    private Long id;
+    private Long idCancha;
     @Column(name = "ubicacion")
     private String ubicacion;
     @Column(name = "cantidad_jugadores")
@@ -28,7 +28,7 @@ public class CanchaEntidad {
     private Long valorCancha;
 
     public CanchaEntidad(Long id, String ubicacion, Long cantidadJugadores, Long valorCancha) {
-        this.id = id;
+        this.idCancha = id;
         this.ubicacion = ubicacion;
         this.cantidadJugadores = cantidadJugadores;
         this.valorCancha = valorCancha;

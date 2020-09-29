@@ -19,7 +19,7 @@ public class ClienteEntidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cliente")
-    private Long id;
+    private Long idCliente;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "apellido")
@@ -32,7 +32,7 @@ public class ClienteEntidad {
     private String cedula;
 
     public ClienteEntidad(Long id, String nombre, String apellido, String telefono, String correo, String cedula) {
-        this.id = id;
+        this.idCliente = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
