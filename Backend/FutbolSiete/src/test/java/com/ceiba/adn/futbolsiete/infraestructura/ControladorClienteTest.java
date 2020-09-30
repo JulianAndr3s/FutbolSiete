@@ -5,6 +5,7 @@ import com.ceiba.adn.futbolsiete.aplicacion.comando.ComandoCliente;
 import com.ceiba.adn.futbolsiete.testdatabuilder.ComandoClienteTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,6 +106,31 @@ public class ControladorClienteTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(comandoCliente)))
                 .andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void excepcionAlCrearCliente() throws Exception {
+        // Arrange
+        ComandoCliente comandoCliente = new ComandoClienteTestDataBuilder().conDatos("123",14L).build();
+
+        mockMvc.perform(post("/cliente")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(comandoCliente)))
+                .andExpect(status().isOk()
+
+                );
+
+        // Act - Assert
+
+        try {
+            mockMvc.perform(post("/cliente")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsString(comandoCliente)))
+                    .andExpect(status().is5xxServerError());
+        } catch(Exception excepcionTest){
+            Assertions.assertEquals(excepcionTest.getCause().getMessage(), "El cliente que intentas agregar ya existe" );
+        }
 
     }
 

@@ -3,7 +3,7 @@ package com.ceiba.adn.futbolsiete.dominio.validaciones;
 import com.ceiba.adn.futbolsiete.dominio.excepcion.ExcepcionObligatorio;
 import com.ceiba.adn.futbolsiete.dominio.excepcion.ExcepcionValorVacio;
 
-public class ValidarArgumento {
+public final class ValidarArgumento {
 
     private ValidarArgumento(){
 
