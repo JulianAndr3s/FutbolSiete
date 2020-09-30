@@ -1,13 +1,10 @@
 package com.ceiba.adn.futbolsiete.infraestructura;
 
 import com.ceiba.adn.futbolsiete.FutbolSieteApplication;
-import com.ceiba.adn.futbolsiete.aplicacion.comando.ComandoCancha;
-import com.ceiba.adn.futbolsiete.aplicacion.comando.ComandoCliente;
-import com.ceiba.adn.futbolsiete.aplicacion.comando.ComandoReserva;
-import com.ceiba.adn.futbolsiete.dominio.excepcion.ExcepcionGeneral;
-import com.ceiba.adn.futbolsiete.testdatabuilder.ComandoCanchaTestDataBuilder;
-import com.ceiba.adn.futbolsiete.testdatabuilder.ComandoClienteTestDataBuilder;
-import com.ceiba.adn.futbolsiete.testdatabuilder.ComandoReservaTestDataBuilder;
+import com.ceiba.adn.futbolsiete.dominio.modelo.Cliente;
+import com.ceiba.adn.futbolsiete.dominio.modelo.Reserva;
+import com.ceiba.adn.futbolsiete.testdatabuilder.ClienteTestDataBuilder;
+import com.ceiba.adn.futbolsiete.testdatabuilder.ReservaTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,6 +43,18 @@ public class ControladorReservaTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
     }
 
+    @Test
+    public void crearReserva() throws Exception {
+
+        Reserva reserva = new ReservaTestDataBuilder().conDatos().build();
+
+        // Act - Assert
+        mockMvc.perform(post("/reserva")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(reserva)))
+                .andExpect(status().isOk());
+
+    }
 
     @Test
     public void listarReservas() throws Exception {

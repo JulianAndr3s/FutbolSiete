@@ -30,6 +30,12 @@ public class ReservaTestDataBuilder {
         return this;
     }
 
+    public ReservaTestDataBuilder conDatos(){
+        this.cliente = new Cliente(15L, "JulianBD", "Bote", "123", "Juli@tes.com", "123456");
+        this.cancha = new Cancha(15L, "Carmen", 9L, 25000L);
+        return this;
+    }
+
     public ReservaTestDataBuilder conPago(Long pagoTotal){
         this.pagoTotal = pagoTotal;
         return this;
