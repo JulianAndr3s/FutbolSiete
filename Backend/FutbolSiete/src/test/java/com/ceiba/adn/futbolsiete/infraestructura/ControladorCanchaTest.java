@@ -69,15 +69,9 @@ public class ControladorCanchaTest {
     public void eliminarCancha() throws Exception {
 
         // Arrange
-        ComandoCancha comandoCancha = new ComandoCanchaTestDataBuilder().conDatos(1L, "La Ceja").build();
-
-        mockMvc.perform(post("/cancha")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(comandoCancha)))
-                .andExpect(status().isOk());
 
         // Act - Assert
-        mockMvc.perform(delete("/cancha/".concat("1"))
+        mockMvc.perform(delete("/cancha/".concat("27"))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()
                 );
