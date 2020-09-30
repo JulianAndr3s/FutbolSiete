@@ -1,8 +1,11 @@
 package com.ceiba.adn.futbolsiete.infraestructura;
 
 import com.ceiba.adn.futbolsiete.FutbolSieteApplication;
+import com.ceiba.adn.futbolsiete.aplicacion.comando.ComandoCancha;
 import com.ceiba.adn.futbolsiete.aplicacion.comando.ComandoCliente;
 import com.ceiba.adn.futbolsiete.aplicacion.comando.ComandoReserva;
+import com.ceiba.adn.futbolsiete.dominio.excepcion.ExcepcionGeneral;
+import com.ceiba.adn.futbolsiete.testdatabuilder.ComandoCanchaTestDataBuilder;
 import com.ceiba.adn.futbolsiete.testdatabuilder.ComandoClienteTestDataBuilder;
 import com.ceiba.adn.futbolsiete.testdatabuilder.ComandoReservaTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,9 +46,9 @@ public class ControladorReservaTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
     }
 
-    @Test
-    public void crearReserva() throws Exception {
 
+    @Test
+    public void listarReservas() throws Exception {
         // Arrange - Act - Assert
         mockMvc.perform(get("/reserva")
                 .contentType(MediaType.APPLICATION_JSON))

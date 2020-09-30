@@ -1,11 +1,7 @@
 package com.ceiba.adn.futbolsiete.dominio.servicios.reserva;
 
-import com.ceiba.adn.futbolsiete.dominio.modelo.Cliente;
 import com.ceiba.adn.futbolsiete.dominio.modelo.Reserva;
-import com.ceiba.adn.futbolsiete.dominio.puerto.repositorio.RepositorioCliente;
 import com.ceiba.adn.futbolsiete.dominio.puerto.repositorio.RepositorioReserva;
-import com.ceiba.adn.futbolsiete.dominio.servicios.cliente.ServicioCrearCliente;
-import com.ceiba.adn.futbolsiete.testdatabuilder.ClienteTestDataBuilder;
 import com.ceiba.adn.futbolsiete.testdatabuilder.ReservaTestDataBuilder;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -17,7 +13,7 @@ public class ServicioCrearReservaTest {
     public RepositorioReserva repositorioReserva;
 
     @Test
-    public void crearClienteTest(){
+    public void crearReservaTest(){
         // Arrange
         repositorioReserva = Mockito.mock(RepositorioReserva.class);
         servicioCrearReserva = new ServicioCrearReserva(repositorioReserva);

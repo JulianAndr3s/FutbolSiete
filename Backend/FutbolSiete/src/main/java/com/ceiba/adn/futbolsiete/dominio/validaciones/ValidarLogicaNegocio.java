@@ -13,8 +13,6 @@ public class ValidarLogicaNegocio {
     private static final Long VALOR_EXTRA = 110L;
     private static final Long DIAS_PARA_DESCUENTO = 9L;
 
-    public ValidarLogicaNegocio() {
-    }
 
     public Long calcularPrecio(LocalDateTime fechaReserva, Long precio) {
         String diaSemana = fechaReserva.getDayOfWeek().toString();

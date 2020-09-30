@@ -5,10 +5,6 @@ import com.ceiba.adn.futbolsiete.dominio.excepcion.ExcepcionValorVacio;
 
 public class ValidarArgumento {
 
-    private ValidarArgumento(){
-
-    }
-
     public static void validarObligatorio(Object valor, String mensaje){
         if (valor == null) {
             throw new ExcepcionObligatorio(mensaje);

@@ -3,7 +3,6 @@ package com.ceiba.adn.futbolsiete.aplicacion.comando;
 import com.ceiba.adn.futbolsiete.dominio.modelo.Cancha;
 import com.ceiba.adn.futbolsiete.dominio.modelo.Cliente;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class ComandoReserva {
