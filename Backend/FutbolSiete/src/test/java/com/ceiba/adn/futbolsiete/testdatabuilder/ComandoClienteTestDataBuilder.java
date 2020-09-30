@@ -25,6 +25,11 @@ public class ComandoClienteTestDataBuilder {
         return this;
     }
 
+    public ComandoClienteTestDataBuilder conNombre(String nombre){
+        this.nombre = nombre;
+        return this;
+    }
+
     public ComandoClienteTestDataBuilder conDatos(String cedula, Long id){
         this.cedula = cedula;
         this.id = id;

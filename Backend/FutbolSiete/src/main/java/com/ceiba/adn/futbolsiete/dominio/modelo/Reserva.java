@@ -26,9 +26,6 @@ public class Reserva {
         this.pagoTotal = pagoTotal;
     }
 
-    public Reserva() {
-    }
-
     public Long getId() {
         return id;
     }

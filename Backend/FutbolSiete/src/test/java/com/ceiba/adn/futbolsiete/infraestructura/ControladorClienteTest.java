@@ -4,6 +4,7 @@ import com.ceiba.adn.futbolsiete.FutbolSieteApplication;
 import com.ceiba.adn.futbolsiete.aplicacion.comando.ComandoCliente;
 import com.ceiba.adn.futbolsiete.testdatabuilder.ComandoClienteTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,10 +19,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -47,27 +50,36 @@ public class ControladorClienteTest {
     }
 
     @Test
-    public void crearCliente() throws Exception {
-        // Arrange
-        ComandoCliente comandoCliente = new ComandoClienteTestDataBuilder().build();
-
-        // Act - Assert
-        mockMvc.perform(post("/cliente")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(comandoCliente)))
-                .andExpect(status().isOk()
-
-        );
-    }
-
-    @Test
     public void listarClientes() throws Exception {
 
         // Act - Assert
         mockMvc.perform(get("/cliente")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()
-                );
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id", is(15)))
+                .andExpect(jsonPath("$[0].nombre", is("JulianBD"))
+        );
+    }
+
+    @Test
+    public void actualizarCliente() throws Exception {
+
+        // Arrange
+        ComandoCliente comandoCliente = new ComandoClienteTestDataBuilder().conDatos("123456", 15L)
+                .conNombre("JulianActualizado").build();
+
+        // Act - Assert
+        mockMvc.perform(put("/cliente")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(comandoCliente)))
+                .andExpect(status().isOk())
+                .andDo(a -> {
+                    Assert.assertEquals(comandoCliente.getId().longValue(), 15L);
+                    Assert.assertEquals(comandoCliente.getCedula(), "123456");
+                    Assert.assertEquals(comandoCliente.getNombre(), "JulianActualizado");
+
+                });
+
     }
 
     @Test
@@ -88,26 +100,6 @@ public class ControladorClienteTest {
                 );
     }
 
-    @Test
-    public void actualizarCliente() throws Exception {
-
-        // Arrange
-        ComandoCliente comandoCliente = new ComandoClienteTestDataBuilder().conDatos("1036200", 11L).build();
-
-        mockMvc.perform(post("/cliente")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(comandoCliente)))
-                .andExpect(status().isOk());
-
-        comandoCliente.setNombre("JulianActualizado");
-
-        // Act - Assert
-        mockMvc.perform(put("/cliente")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(comandoCliente)))
-                .andExpect(status().isOk());
-
-    }
 
     @Test
     public void excepcionAlCrearCliente() throws Exception {
@@ -132,6 +124,19 @@ public class ControladorClienteTest {
             Assertions.assertEquals(excepcionTest.getCause().getMessage(), "El cliente que intentas agregar ya existe" );
         }
 
+    }
+
+    @Test
+    public void crearCliente() throws Exception {
+        // Arrange
+        ComandoCliente comandoCliente = new ComandoClienteTestDataBuilder().build();
+
+        // Act - Assert
+        mockMvc.perform(post("/cliente")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(comandoCliente)))
+                .andExpect(status().isOk()
+                );
     }
 
 }

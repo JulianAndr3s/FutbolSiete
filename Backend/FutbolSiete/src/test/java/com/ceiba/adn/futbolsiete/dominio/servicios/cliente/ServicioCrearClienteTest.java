@@ -47,4 +47,17 @@ public class ServicioCrearClienteTest {
             Assertions.assertEquals(EL_CLIENTE_YA_EXISTE, e.getMessage());
         }
     }
+
+    @Test
+    public void buscarPorCedulaTest(){
+        // Arrange
+        repositorioCliente = Mockito.mock(RepositorioCliente.class);
+
+        // Act
+        Cliente cliente = repositorioCliente.buscarPorCedula(null);
+
+        // Assert
+        Assertions.assertEquals(cliente, null);
+    }
+
 }

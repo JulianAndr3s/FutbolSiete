@@ -25,6 +25,11 @@ public class ReservaTestDataBuilder {
         this.pagoTotal = 150000L;
     }
 
+    public ReservaTestDataBuilder conId(Long id){
+        this.id = id;
+        return this;
+    }
+
     public ReservaTestDataBuilder conFecha(LocalDateTime fecha){
         this.fecha = fecha;
         return this;

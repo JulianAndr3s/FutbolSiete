@@ -1,9 +1,7 @@
 package com.ceiba.adn.futbolsiete.infraestructura;
 
 import com.ceiba.adn.futbolsiete.FutbolSieteApplication;
-import com.ceiba.adn.futbolsiete.dominio.modelo.Cliente;
 import com.ceiba.adn.futbolsiete.dominio.modelo.Reserva;
-import com.ceiba.adn.futbolsiete.testdatabuilder.ClienteTestDataBuilder;
 import com.ceiba.adn.futbolsiete.testdatabuilder.ReservaTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
@@ -19,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -53,7 +52,6 @@ public class ControladorReservaTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(reserva)))
                 .andExpect(status().isOk());
-
     }
 
     @Test
@@ -61,6 +59,25 @@ public class ControladorReservaTest {
         // Arrange - Act - Assert
         mockMvc.perform(get("/reserva")
                 .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()
+                );
+    }
+
+    @Test
+    public void eliminarReserva() throws Exception {
+
+        Reserva reserva = new ReservaTestDataBuilder().conDatos().conId(2L).build();
+
+        // Act - Assert
+        mockMvc.perform(post("/reserva")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(reserva)))
                 .andExpect(status().isOk());
+
+        // Act - Assert
+        mockMvc.perform(delete("/reserva/".concat("2"))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()
+                );
     }
 }
