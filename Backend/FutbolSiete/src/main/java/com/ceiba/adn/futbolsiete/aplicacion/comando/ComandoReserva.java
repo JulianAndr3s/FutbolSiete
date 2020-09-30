@@ -4,16 +4,17 @@ import com.ceiba.adn.futbolsiete.dominio.modelo.Cancha;
 import com.ceiba.adn.futbolsiete.dominio.modelo.Cliente;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ComandoReserva {
 
     private Long id;
     private Cliente cliente;
-    private LocalDate fecha;
+    private LocalDateTime fecha;
     private Cancha cancha;
     private Long pagoTotal;
 
-    public ComandoReserva(Long id, Cliente cliente, LocalDate fecha, Cancha cancha, Long pagoTotal) {
+    public ComandoReserva(Long id, Cliente cliente, LocalDateTime fecha, Cancha cancha, Long pagoTotal) {
         this.id = id;
         this.cliente = cliente;
         this.fecha = fecha;
@@ -32,7 +33,7 @@ public class ComandoReserva {
         return cliente;
     }
 
-    public LocalDate getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 

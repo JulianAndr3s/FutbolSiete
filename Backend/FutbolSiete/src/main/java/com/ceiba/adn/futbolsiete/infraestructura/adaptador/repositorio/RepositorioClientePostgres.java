@@ -28,12 +28,6 @@ public class RepositorioClientePostgres implements RepositorioCliente {
     }
 
     @Override
-    public void actualizarCliente(Cliente cliente) {
-        ClienteEntidad clienteEntidad = convertirCliente.convertirDominioPorEntidad(cliente);
-        repositorioClienteJpa.save(clienteEntidad);
-    }
-
-    @Override
     public void eliminarCliente(Long id) {
         repositorioClienteJpa.deleteById(id);
     }
@@ -43,6 +37,12 @@ public class RepositorioClientePostgres implements RepositorioCliente {
         List<ClienteEntidad> listaClienteEntidad = repositorioClienteJpa.findAll();
         List<Cliente> listaCliente= new ArrayList<>();
         return convertirCliente.convertirListaClienteEntidadAListaCliente(listaClienteEntidad, listaCliente);
+    }
+
+    @Override
+    public void actualizarCliente(Cliente cliente) {
+        ClienteEntidad clienteEntidadActualizar = convertirCliente.convertirDominioPorEntidad(cliente);
+        repositorioClienteJpa.save(clienteEntidadActualizar);
     }
 
     @Override

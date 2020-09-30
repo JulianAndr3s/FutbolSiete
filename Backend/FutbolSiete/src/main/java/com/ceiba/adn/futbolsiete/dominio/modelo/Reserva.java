@@ -1,16 +1,16 @@
 package com.ceiba.adn.futbolsiete.dominio.modelo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Reserva {
 
     private Long id;
     private Cliente cliente;
-    private LocalDate fecha;
+    private LocalDateTime fecha;
     private Cancha cancha;
     private Long pagoTotal;
 
-    public Reserva(Long id, Cliente cliente, LocalDate fecha, Cancha cancha, Long pagoTotal) {
+    public Reserva(Long id, Cliente cliente, LocalDateTime fecha, Cancha cancha, Long pagoTotal) {
         this.id = id;
         this.cliente = cliente;
         this.fecha = fecha;
@@ -37,11 +37,11 @@ public class Reserva {
         this.cliente = cliente;
     }
 
-    public LocalDate getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 

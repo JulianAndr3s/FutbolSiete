@@ -28,14 +28,14 @@ public class RepositorioCanchaPostgres implements RepositorioCancha {
     }
 
     @Override
-    public void actualizarCancha(Cancha cancha) {
-        CanchaEntidad canchaEntidad = convertirCancha.convertirDominioPorEntidad(cancha);
-        repositorioCanchaJpa.save(canchaEntidad);
+    public void eliminarCancha(Long id) {
+        repositorioCanchaJpa.deleteById(id);
     }
 
     @Override
-    public void eliminarCancha(Long id) {
-        repositorioCanchaJpa.deleteById(id);
+    public void actualizarCancha(Cancha cancha) {
+        CanchaEntidad canchaEntidadActualizar = convertirCancha.convertirDominioPorEntidad(cancha);
+        repositorioCanchaJpa.save(canchaEntidadActualizar);
     }
 
     @Override

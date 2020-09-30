@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -27,14 +27,14 @@ public class ReservaEntidad {
     @JoinColumn(name = "id_cliente")
     private ClienteEntidad cliente;
     @Column(name = "fecha")
-    private LocalDate fecha;
+    private LocalDateTime fecha;
     @ManyToOne()
     @JoinColumn(name = "id_cancha")
     private CanchaEntidad cancha;
     @Column(name = "pago_total")
     private Long pagoTotal;
 
-    public ReservaEntidad(Long id, ClienteEntidad cliente, LocalDate fecha, CanchaEntidad cancha, Long pagoTotal) {
+    public ReservaEntidad(Long id, ClienteEntidad cliente, LocalDateTime fecha, CanchaEntidad cancha, Long pagoTotal) {
         this.id = id;
         this.cliente = cliente;
         this.fecha = fecha;
