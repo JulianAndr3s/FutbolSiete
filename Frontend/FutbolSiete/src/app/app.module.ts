@@ -11,6 +11,8 @@ import { CanchaComponent } from './feature/cancha/cancha.component';
 import { CrearCanchaComponent } from './feature/cancha/crear-cancha/crear-cancha.component';
 import { CrearClienteComponent } from './feature/cliente/crear-cliente/crear-cliente.component';
 import { CrearReservaComponent } from './feature/reserva/crear-reserva/crear-reserva.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,7 +29,11 @@ import { CrearReservaComponent } from './feature/reserva/crear-reserva/crear-res
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
