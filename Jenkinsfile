@@ -69,14 +69,6 @@ pipeline {
         }
     }
 	
-		stage('Test_carga') {
-    steps {
-        echo '------------>Test de carga<------------'                     
-        dir("${PROJETC_PATH_JMETER}"){                          
-            sh './jmeter  -n -t ${WORKSPACE}/PruebaCargaFutbol.jmx -l ${WORKSPACE}/performacetest.jtl'   
-            performanceReport parsers: [[$class: 'JMeterParser', glob: "${WORKSPACE}/performacetest.jtl"]], sourceDataFiles: "${WORKSPACE}/performacetest.jtl", errorFailedThreshold: 20, errorUnstableThreshold: 20, ignoreFailedBuilds: false, ignoreUnstableBuilds: false, relativeFailedThresholdNegative: 0, relativeFailedThresholdPositive: 0, relativeUnstableThresholdNegative: 0, relativeUnstableThresholdPositive: 0
-        }
-    }
 }
 	
   }
