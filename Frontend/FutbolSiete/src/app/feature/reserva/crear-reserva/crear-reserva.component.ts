@@ -21,15 +21,15 @@ export class CrearReservaComponent implements OnInit {
 
   formularioReservas: FormGroup;
 
-  constructor(private clienteServicio: ClienteService, private canchaServicio: CanchaService, 
-    private reservaServicio: ReservaService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private clienteServicio: ClienteService, private canchaServicio: CanchaService, private reservaServicio: ReservaService,
+              private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.listarComponentes();
     this.iniciarFormulario();
-  } 
+  }
 
-  iniciarFormulario(){
+  iniciarFormulario() {
     this.formularioReservas = this.formBuilder.group({
       cliente: ['', [Validators.required]],
       cancha: ['', [Validators.required]],
