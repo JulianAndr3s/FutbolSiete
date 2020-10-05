@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Cliente } from 'src/app/shared/modelos/cliente';
 import { ClienteService } from '../../shared/servicios/cliente.service';
 
@@ -18,7 +17,7 @@ export class ClienteComponent implements OnInit {
 
   formularioClientes: FormGroup;
 
-  constructor(private clienteServicio: ClienteService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private clienteServicio: ClienteService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.listarClientes();

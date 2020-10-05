@@ -1,1 +1,54 @@
-<p>crear-cliente works!</p>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+        <li class="breadcrumb-item"><a [routerLink]="['/clientes']">Lista de Clientes</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Crear Cliente</li>
+    </ol>
+</nav>
+
+<div id="bienvenida">
+    <img src="../../../../assets/BalonArte.jpg">
+    <h1 class="display-4">Registro de clientes</h1>
+</div>
+
+<div class="jumbotron">
+    <p class="lead">Llena el formulario completo.</p>
+    <hr class="my-4">
+    <h3>Datos del cliente: </h3>
+        <form [formGroup]= "formularioClientes">
+            <div class="row">
+                <div class="col-6">
+                    <label for="nombres">Nombre</label>
+                    <input type="text" class="form-control" id="nombres" name="nombre" formControlName="nombre" required>
+                </div>
+                <div class="col-6">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" class="form-control" id="apellidos" name="apellido" formControlName="apellido">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="nombres">Telefono</label>
+                    <input type="text" class="form-control" id="telefonos" name="telefono" formControlName="telefono">
+                </div>
+                <div class="col-6">
+                    <label for="apellido">Correo</label>
+                    <input type="text" class="form-control" id="correos" name="correo" formControlName="correo">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="nombres">Documento de Identificación</label>
+                    <input type="text" class="form-control" id="cedulas" name="cedula" formControlName="cedula">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-6">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="crearCliente()">Aceptar</button>
+                </div>
+            </div>
+        
+        </form>
+
+</div>

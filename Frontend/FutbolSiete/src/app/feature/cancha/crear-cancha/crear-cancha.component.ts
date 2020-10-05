@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Cancha } from '../../../shared/modelos/cancha';
+import { CanchaService } from '../../../shared/servicios/cancha.service';
 
 @Component({
   selector: 'app-crear-cancha',
@@ -7,9 +11,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrearCanchaComponent implements OnInit {
 
-  constructor() { }
+  public cancha: Cancha = new Cancha();
+  formularioCanchas: FormGroup;
+
+  constructor(private canchaServicio: CanchaService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
+    this.iniciarFormulario();
   }
 
+  iniciarFormulario(){
+    this.formularioCanchas = this.formBuilder.group({
+      ubicacion: ['', [Validators.required]],
+      cantidadJugadores: ['', [Validators.required]],
+      valorCancha: ['', [Validators.required]],
+    });
+  }
+
+  get formulario() {
+    return this.formularioCanchas.controls;
+  }
+
+  crearCancha(){
+    this.cancha.ubicacion = this.formulario.ubicacion.value;
+    this.cancha.cantidadJugadores = this.formulario.cantidadJugadores.value;
+    this.cancha.valorCancha = this.formulario.valorCancha.value;
+
+    this.canchaServicio.insertarCancha(this.cancha).subscribe(
+      _ => {
+        this.router.navigate(['/canchas']);
+      }
+    );
+
+  }
 }

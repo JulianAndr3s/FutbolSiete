@@ -1,1 +1,46 @@
-<p>crear-reserva works!</p>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+        <li class="breadcrumb-item"><a [routerLink]="['/clientes']">Lista de Reservas</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Crear Reserva</li>
+    </ol>
+</nav>
+
+<div id="bienvenida">
+    <img src="../../../../assets/BalonArte.jpg">
+    <h1 class="display-4">Registro de reservas</h1>
+</div>
+
+<div class="jumbotron">
+    <p class="lead">Llena el formulario completo.</p>
+    <hr class="my-4">
+    <h3>Datos de la reserva: </h3>
+        <form [formGroup]= "formularioReservas">
+            <div class="row">
+                <div class="col-6">
+                    <label for="nombres">Cliente</label>
+                    <select class="form-control" formControlName="cliente">
+                        <option *ngFor="let cliente of clientes" [value]="cliente.cedula"> {{cliente.nombre}} {{cliente.apellido}} </option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label for="nombres">Cancha</label>
+                    <select class="form-control" formControlName="cancha">
+                        <option *ngFor="let cancha of canchas" [value]="cancha.id"> {{cancha.ubicacion}} </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row"> 
+                <div class="col-6">
+                    <label for="nombres">Fecha</label>
+                    <input type="datetime-local" class="form-control" formControlName="fecha" id="fechas" name="fecha" >
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-6">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="crearReserva()">Aceptar</button>
+                </div>
+            </div>
+        </form>
+</div>

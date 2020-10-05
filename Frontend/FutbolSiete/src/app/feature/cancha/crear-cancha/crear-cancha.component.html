@@ -1,1 +1,44 @@
-<p>crear-cancha works!</p>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+        <li class="breadcrumb-item"><a [routerLink]="['/clientes']">Lista de Canchas</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Crear Cancha</li>
+    </ol>
+</nav>
+
+<div id="bienvenida">
+    <img src="../../../../assets/BalonArte.jpg">
+    <h1 class="display-4">Registro de canchas</h1>
+</div>
+
+<div class="jumbotron">
+    <p class="lead">Llena el formulario completo.</p>
+    <hr class="my-4">
+    <h3>Datos de la cancha: </h3>
+        <form [formGroup]= "formularioCanchas">
+            <div class="row">
+                <div class="col-12">
+                    <label for="nombres">Ubicacion</label>
+                    <input type="text" class="form-control" formControlName="ubicacion">
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-12">
+                    <label for="nombres">Cantidad de Jugadores</label>
+                    <input type="text" class="form-control" formControlName="cantidadJugadores">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <label for="nombres">Valor de la Cancha</label>
+                    <input type="text" class="form-control" formControlName="valorCancha">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-6">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="crearCancha()">Aceptar</button>
+                </div>
+            </div>
+        </form>
+</div>

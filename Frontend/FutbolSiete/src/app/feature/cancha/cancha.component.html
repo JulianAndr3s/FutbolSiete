@@ -1,3 +1,134 @@
-<p>cancha works!</p>
+<div class="card">
+    <div class="card-header">
+        <a class="btn btn-outline-secondary" [routerLink]="['/crear-cancha']" routerLinkActive="active">Crear Cancha</a>   
+        <h6> (!) Haz clic aquí para añadir una nueva cancha</h6>
+    </div>
 
-<button [routerLink]="['/crear-cancha']" >Ir a crear</button>
+    <div id="bienvenida">
+        <br>
+        <img src="../../../assets/BalonArte.jpg">
+        <h1 class="display-4">Bienvenido a Futbol Siete</h1>
+        <h4 class="lead">Aquí podrás ver las canchas disponibles, modificar algunos datos de las que existan o registrar una nueva dando clic en el boton de arriba</h4>
+    </div>
+
+    <br>
+    <hr>
+
+    <div class="card-body">
+        <blockquote class="blockquote mb-0">
+            <div *ngIf="canchas.length == 0">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>¡Lo siento! </strong>Aún no hay canchas registradas en la base de datos, agrega la primera en el botón que esta en la parte de superior izquierda, llamado "Crear Cancha".
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="canchas.length > 0">
+                <p>Canchas</p>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Ubicacion</th>
+                            <th scope="col">Cantidad de Jugadores</th>
+                            <th scope="col">Valor de la Cancha</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cancha of canchas">
+                            <th scope="row">{{cancha.ubicacion}}</th>
+                            <td>{{cancha.cantidadJugadores}} </td>
+                            <td>{{cancha.valorCancha}} </td>
+                            <td>
+                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2" (click)="mostrarModal(cancha)">Editar</button>
+                                <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" (click)="mostrarModal(cancha)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<br>
+<br>
+<br>
+
+<!-- El Modal de Eliminar-->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Eliminar</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                ¿Está seguro que desea eliminar la cancha ubicada en {{canchaSeleccionada.ubicacion}}?
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="eliminarCancha(canchaSeleccionada.id)">Aceptar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- El Modal de Editar-->
+<div class="modal fade" id="myModal2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Editar</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header">
+                        Actualizar la cancha ubicada en {{canchaSeleccionada.ubicacion}}
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]= "formularioCanchas">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="nombres">Ubicacion</label>
+                                    <input type="text" class="form-control" formControlName="ubicacion">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="nombres">Cantidad de Jugadores</label>
+                                    <input type="text" class="form-control" formControlName="cantidadJugadores">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="nombres">Valor de la Cancha</label>
+                                    <input type="text" class="form-control" formControlName="valorCancha">
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="actualizarCancha()">Aceptar</button>
+            </div>
+
+        </div>
+    </div>
+</div>

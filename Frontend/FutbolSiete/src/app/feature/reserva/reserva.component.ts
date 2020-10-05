@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Reserva } from 'src/app/shared/modelos/reserva';
+import { ReservaService } from 'src/app/shared/servicios/reserva.service';
 
 @Component({
   selector: 'app-reserva',
@@ -7,9 +9,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReservaComponent implements OnInit {
 
-  constructor() { }
+  public reserva: Reserva = new Reserva();
+  public reservas: Reserva[];
+  public reservaSeleccionada: Reserva = new Reserva();
+  constructor(private reservaService: ReservaService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.listarReservas();
   }
 
+  listarReservas() {
+    this.reservaService.listarReservas().subscribe(
+      (reserva) => {
+        this.reservas = reserva;
+      }
+    );
+  }
+
+  mostrarModal(reserva: Reserva) {
+    this.reservaSeleccionada = reserva;
+  }
+
+  eliminarReserva(id: number) {
+    this.reservaService.eliminarReserva(id).subscribe(
+      _ => (
+        this.reservas = this.reservas.filter(reserva => reserva !== this.reservaSeleccionada)
+      )
+    );
+  }
 }
