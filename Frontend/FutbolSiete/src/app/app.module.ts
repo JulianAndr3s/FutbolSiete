@@ -13,6 +13,7 @@ import { CrearClienteComponent } from './feature/cliente/crear-cliente/crear-cli
 import { CrearReservaComponent } from './feature/reserva/crear-reserva/crear-reserva.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClienteService } from './shared/servicios/cliente.service';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ClienteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
