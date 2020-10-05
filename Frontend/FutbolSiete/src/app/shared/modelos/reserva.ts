@@ -8,3 +8,4 @@ export class Reserva {
     cancha = new Cancha();
     pagoTotal: number;
 }
+

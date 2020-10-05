@@ -16,9 +16,9 @@ import { Router } from '@angular/router';
 export class CrearReservaComponent implements OnInit {
 
   clientes: Cliente[];
-  canchas: Cancha[];
   reserva: Reserva = new Reserva();
-
+  canchas: Cancha[];
+  
   formularioReservas: FormGroup;
 
   constructor(private clienteServicio: ClienteService, private canchaServicio: CanchaService, private reservaServicio: ReservaService,
