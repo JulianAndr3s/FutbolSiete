@@ -17,9 +17,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -43,6 +45,23 @@ public class ControladorReservaTest {
     }
 
     @Test
+    public void listarReservas() throws Exception {
+        //Arrange
+        Reserva reserva = new ReservaTestDataBuilder().conDatos().build();
+
+        mockMvc.perform(post("/reserva")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(reserva)))
+                .andExpect(status().isOk());
+
+        // Act - Assert
+        mockMvc.perform(get("/reserva")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].pagoTotal", is(150000)));
+    }
+
+    @Test
     public void crearReserva() throws Exception {
 
         Reserva reserva = new ReservaTestDataBuilder().conDatos().build();
@@ -54,14 +73,6 @@ public class ControladorReservaTest {
                 .andExpect(status().isOk());
     }
 
-    @Test
-    public void listarReservas() throws Exception {
-        // Arrange - Act - Assert
-        mockMvc.perform(get("/reserva")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()
-                );
-    }
 
     @Test
     public void eliminarReserva() throws Exception {
