@@ -74,3 +74,10 @@ describe('listarReserva', function() {
     expect(browser.getTitle()).toEqual('FutbolSiete');
   });
 });
+
+describe('Prueba final', function() {
+  it('Prueba final', function() {
+    browser.get('http://localhost:4200/');
+    expect(browser.getTitle()).toEqual('FutbolSiete');
+  });
+});
