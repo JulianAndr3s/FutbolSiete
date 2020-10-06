@@ -9,11 +9,26 @@ import java.time.LocalDateTime;
 public class ValidarLogicaNegocioTest {
 
     @Test
-    public void calcularPrecioFinDeSemana(){
+    public void calcularPrecioFinDeSemanaDomingo(){
 
         // Arrange
         ValidarLogicaNegocio validarLogicaNegocio = new ValidarLogicaNegocio();
         LocalDateTime fechaReserva = LocalDateTime.of(2020,10,3,11,30);
+        Long precio = 25000L;
+
+        // Act
+        Long resultado = validarLogicaNegocio.calcularPrecio(fechaReserva, precio);
+
+        // Assert
+        Assertions.assertEquals(resultado, 27500L);
+    }
+
+    @Test
+    public void calcularPrecioFinDeSemanaSabado(){
+
+        // Arrange
+        ValidarLogicaNegocio validarLogicaNegocio = new ValidarLogicaNegocio();
+        LocalDateTime fechaReserva = LocalDateTime.of(2020,10,11,11,30);
         Long precio = 25000L;
 
         // Act
