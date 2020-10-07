@@ -18,6 +18,7 @@ export class CrearReservaComponent implements OnInit {
   clientes: Cliente[];
   reserva: Reserva = new Reserva();
   canchas: Cancha[];
+  formularioEnviado = false;
   
   formularioReservas: FormGroup;
 
@@ -70,11 +71,16 @@ export class CrearReservaComponent implements OnInit {
     this.reserva.fecha = this.formulario.fecha.value;
     this.reserva.pagoTotal = this.reserva.cancha.valorCancha;
 
-    this.reservaServicio.insertarReserva(this.reserva).subscribe(
-      _ => {
-        this.router.navigate(['/reservas']);
-      }
-    );
+    this.formularioEnviado = true;
+
+    if(this.formularioReservas.valid){
+      this.reservaServicio.insertarReserva(this.reserva).subscribe(
+        _ => {
+          this.router.navigate(['/reservas']);
+        }
+      );
+    }
+
 
   }
 

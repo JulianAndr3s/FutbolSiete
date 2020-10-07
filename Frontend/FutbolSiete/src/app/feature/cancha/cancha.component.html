@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <a class="btn btn-outline-secondary" [routerLink]="['/crear-cancha']" routerLinkActive="active">Crear Cancha</a>   
+        <a class="btn btn-outline-secondary" [routerLink]="['/canchas/crear-cancha']" routerLinkActive="active">Crear Cancha</a>   
         <h6> (!) Haz clic aquí para añadir una nueva cancha</h6>
     </div>
 
@@ -103,19 +103,28 @@
                             <div class="row">
                                 <div class="col-12">
                                     <label for="nombres">Ubicacion</label>
-                                    <input type="text" class="form-control" formControlName="ubicacion">
+                                    <input type="text" class="form-control" formControlName="ubicacion" required>
+                                    <div *ngIf="formulario.ubicacion.errors?.required && formularioEnviado">
+                                        <label id="error"> Se debe agregar una ubicacion para la cancha</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <label for="nombres">Cantidad de Jugadores</label>
-                                    <input type="text" class="form-control" formControlName="cantidadJugadores">
+                                    <input type="number" class="form-control" formControlName="cantidadJugadores" required>
+                                    <div *ngIf="formulario.cantidadJugadores.errors?.required && formularioEnviado">
+                                        <label id="error"> Se debe agregar la cantidad de jugadores para la cancha</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <label for="nombres">Valor de la Cancha</label>
-                                    <input type="text" class="form-control" formControlName="valorCancha">
+                                    <input type="number" class="form-control" formControlName="valorCancha" required>
+                                    <div *ngIf="formulario.valorCancha.errors?.required && formularioEnviado">
+                                        <label id="error"> Se debe agregar el valor de la cancha</label>
+                                    </div>
                                 </div>
                             </div>
                         </form>

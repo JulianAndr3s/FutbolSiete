@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <a class="btn btn-outline-secondary" [routerLink]="['/crear-cliente']" routerLinkActive="active">Registrar Cliente</a>   
+        <a class="btn btn-outline-secondary" [routerLink]="['/clientes/crear-cliente']" routerLinkActive="active">Registrar Cliente</a>   
         <h6> (!) Haz clic aquí para añadir nuevos clientes</h6>
     </div>
 
@@ -16,7 +16,7 @@
 
     <div class="card-body">
         <blockquote class="blockquote mb-0">
-            <div *ngIf="clientes.length == 0">
+            <div *ngIf= "clientes.length == 0">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>¡Lo siento! </strong>Aún no hay clientes registrados en la base de datos, agrega el primer cliente en el botón que esta en la parte de superior izquierda, llamado "Registrar Cliente".
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -24,7 +24,7 @@
                     </button>
                 </div>
             </div>
-            <div *ngIf="clientes.length > 0">
+            <div *ngIf= "clientes.length > 0">
                 <p>Clientes</p>
                 <table class="table">
                     <thead class="thead-dark">
@@ -38,7 +38,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let cliente of clientes">
+                        <tr *ngFor= "let cliente of clientes">
                             <th scope="row">{{cliente.cedula}}</th>
                             <td>{{cliente.nombre}} </td>
                             <td>{{cliente.apellido}} </td>

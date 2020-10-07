@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cancha } from 'src/app/shared/modelos/cancha';
 import { CanchaService } from '../../shared/servicios/cancha.service';
 
@@ -16,6 +16,7 @@ export class CanchaComponent implements OnInit {
   public canchaSeleccionada: Cancha = new Cancha();
 
   formularioCanchas: FormGroup;
+  formularioEnviado = false;
 
   constructor(private canchaServicio: CanchaService, private formBuilder: FormBuilder) { }
 
@@ -34,9 +35,9 @@ export class CanchaComponent implements OnInit {
 
   iniciarFormulario(){
     this.formularioCanchas = this.formBuilder.group({
-      ubicacion: [this.canchaSeleccionada.ubicacion],
-      cantidadJugadores: [this.canchaSeleccionada.cantidadJugadores],
-      valorCancha: [this.canchaSeleccionada.valorCancha],
+      ubicacion: [this.canchaSeleccionada.ubicacion, [Validators.required]],
+      cantidadJugadores: [this.canchaSeleccionada.cantidadJugadores, [Validators.required]],
+      valorCancha: [this.canchaSeleccionada.valorCancha, [Validators.required]],
     });
   }
 
@@ -62,12 +63,16 @@ export class CanchaComponent implements OnInit {
     this.canchaActualizar.ubicacion = this.formulario.ubicacion.value;
     this.canchaActualizar.cantidadJugadores = this.formulario.cantidadJugadores.value;
     this.canchaActualizar.valorCancha = this.formulario.valorCancha.value;
-
+  
+    this.formularioEnviado = true;
+  
     this.canchaServicio.actualizarCancha(this.canchaActualizar).subscribe(
       _ => {
         this.listarCanchas();
       }
     );
+
+    
   }
 
 }

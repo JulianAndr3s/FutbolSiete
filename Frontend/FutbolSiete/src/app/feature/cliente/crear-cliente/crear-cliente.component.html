@@ -20,26 +20,41 @@
                 <div class="col-6">
                     <label for="nombres">Nombre</label>
                     <input type="text" class="form-control" id="nombres" name="nombre" formControlName="nombre" required>
+                    <div *ngIf="formulario.nombre.errors?.required && formularioEnviado">
+                        <label id="error"> Se debe agregar un nombre para el cliente</label>
+                    </div>
                 </div>
                 <div class="col-6">
                     <label for="apellido">Apellido</label>
                     <input type="text" class="form-control" id="apellidos" name="apellido" formControlName="apellido">
+                    <div *ngIf="formulario.apellido.errors?.required && formularioEnviado">
+                        <label id="error"> Se debe agregar un apellido para el cliente</label>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <label for="nombres">Telefono</label>
-                    <input type="text" class="form-control" id="telefonos" name="telefono" formControlName="telefono">
+                    <input type="number" class="form-control" id="telefonos" name="telefono" formControlName="telefono">
+                    <div *ngIf="formulario.telefono.errors?.required && formularioEnviado">
+                        <label id="error"> Se debe agregar un telefono para el cliente</label>
+                    </div>
                 </div>
                 <div class="col-6">
                     <label for="apellido">Correo</label>
                     <input type="text" class="form-control" id="correos" name="correo" formControlName="correo">
+                    <div *ngIf="formulario.correo.errors?.required && formularioEnviado">
+                        <label id="error"> Se debe agregar un correo para el cliente</label>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <label for="nombres">Documento de Identificación</label>
-                    <input type="text" class="form-control" id="cedula" name="cedula" formControlName="cedula">
+                    <input type="number" class="form-control" id="cedula" name="cedula" formControlName="cedula">
+                    <div *ngIf="formulario.cedula.errors?.required && formularioEnviado">
+                        <label id="error"> Se debe agregar un documento de indentificación para el cliente</label>
+                    </div>
                 </div>
             </div>
             <br>

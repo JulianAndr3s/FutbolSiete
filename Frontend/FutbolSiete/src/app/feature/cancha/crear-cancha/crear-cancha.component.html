@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         
-        <li class="breadcrumb-item"><a [routerLink]="['/clientes']">Lista de Canchas</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/canchas']">Lista de Canchas</a></li>
         <li class="breadcrumb-item active" aria-current="page">Crear Cancha</li>
     </ol>
 </nav>
@@ -19,19 +19,28 @@
             <div class="row">
                 <div class="col-12">
                     <label for="nombres">Ubicacion</label>
-                    <input id="ubicacion" type="text" class="form-control" formControlName="ubicacion">
+                    <input id="ubicacion" type="text" class="form-control" formControlName="ubicacion" required>
+                    <div *ngIf="formulario.ubicacion.errors?.required && formularioEnviado">
+                        <label id="error"> Se debe agregar una ubicacion para la cancha</label>
+                    </div>
                 </div>
             </div> 
             <div class="row">
                 <div class="col-12">
                     <label for="nombres">Cantidad de Jugadores</label>
-                    <input id="cantidadJugadores" type="text" class="form-control" formControlName="cantidadJugadores">
+                    <input id="cantidadJugadores" type="number" class="form-control" formControlName="cantidadJugadores" required>
+                    <div *ngIf="formulario.cantidadJugadores.errors?.required && formularioEnviado">
+                        <label id="error"> Se debe agregar la cantidad de jugadores para la cancha</label>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <label for="nombres">Valor de la Cancha</label>
-                    <input id="valorCancha" type="text" class="form-control" formControlName="valorCancha">
+                    <input id="valorCancha" type="number" class="form-control" formControlName="valorCancha" required>
+                    <div *ngIf="formulario.valorCancha.errors?.required && formularioEnviado">
+                        <label id="error"> Se debe agregar el valor de la cancha</label>
+                    </div>
                 </div>
             </div>
             <br>

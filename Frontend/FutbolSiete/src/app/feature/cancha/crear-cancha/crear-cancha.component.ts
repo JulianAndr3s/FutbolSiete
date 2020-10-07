@@ -13,6 +13,7 @@ export class CrearCanchaComponent implements OnInit {
 
   public cancha: Cancha = new Cancha();
   formularioCanchas: FormGroup;
+  formularioEnviado = false;
 
   constructor(private canchaServicio: CanchaService, private formBuilder: FormBuilder, private router: Router) { }
 
@@ -37,11 +38,15 @@ export class CrearCanchaComponent implements OnInit {
     this.cancha.cantidadJugadores = this.formulario.cantidadJugadores.value;
     this.cancha.valorCancha = this.formulario.valorCancha.value;
 
-    this.canchaServicio.insertarCancha(this.cancha).subscribe(
-      _ => {
-        this.router.navigate(['/canchas']);
-      }
-    );
+    this.formularioEnviado = true;
 
+    
+    if(this.formularioCanchas.valid){
+      this.canchaServicio.insertarCancha(this.cancha).subscribe(
+        _ => {
+          this.router.navigate(['/canchas']);
+        }
+      );
+    }
   }
 }

@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         
-        <li class="breadcrumb-item"><a [routerLink]="['/clientes']">Lista de Reservas</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/reservas']">Lista de Reservas</a></li>
         <li class="breadcrumb-item active" aria-current="page">Crear Reserva</li>
     </ol>
 </nav>
@@ -22,18 +22,27 @@
                     <select class="form-control" id="cliente" formControlName="cliente">
                         <option *ngFor="let cliente of clientes" [value]="cliente.cedula"> {{cliente.nombre}} {{cliente.apellido}} </option>
                     </select>
+                    <div *ngIf="formulario.cliente.errors?.required && formularioEnviado">
+                        <label id="error"> Se debe seleccionar un cliente</label>
+                    </div>
                 </div>
                 <div class="col-6">
                     <label for="nombres">Cancha</label>
                     <select class="form-control" id="cancha" formControlName="cancha">
                         <option *ngFor="let cancha of canchas" [value]="cancha.id"> {{cancha.ubicacion}} </option>
                     </select>
+                    <div *ngIf="formulario.cancha.errors?.required && formularioEnviado">
+                        <label id="error"> Se debe seleccionar una cancha</label>
+                    </div>
                 </div>
             </div>
             <div class="row"> 
                 <div class="col-6">
                     <label for="nombres">Fecha</label>
                     <input type="datetime-local" class="form-control" formControlName="fecha" id="fecha" name="fecha" >
+                    <div *ngIf="formulario.fecha.errors?.required && formularioEnviado">
+                        <label id="error"> Se debe agregar una fecha</label>
+                    </div>
                 </div>
             </div>
             <br>

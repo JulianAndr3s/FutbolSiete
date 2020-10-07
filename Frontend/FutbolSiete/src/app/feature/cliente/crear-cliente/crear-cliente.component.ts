@@ -13,6 +13,7 @@ export class CrearClienteComponent implements OnInit {
 
   public cliente: Cliente = new Cliente();
   formularioClientes: FormGroup;
+  formularioEnviado = false;
 
   constructor(private clienteServicio: ClienteService, private formBuilder: FormBuilder, private router: Router) { }
 
@@ -41,12 +42,16 @@ export class CrearClienteComponent implements OnInit {
     this.cliente.correo = this.formulario.correo.value;
     this.cliente.cedula = this.formulario.cedula.value;
 
-    this.clienteServicio.insertarCliente(this.cliente).subscribe(
-      _ => {
-        this.router.navigate(['/clientes']);
-      }
-    );
+    this.formularioEnviado = true;
 
+    if(this.formularioClientes.valid){
+      this.clienteServicio.insertarCliente(this.cliente).subscribe(
+        _ => {
+          this.router.navigate(['/clientes']);
+        }
+      );
+    }
+    
   }
 
 }
