@@ -1,4 +1,7 @@
 import { browser, logging, element, by } from 'protractor';
+import { ClientePage } from './page-object/cliente.po';
+import { CanchaPage } from './page-object/cancha.po';
+import { ReservaPage } from './page-object/reserva.po';
 
 describe('Prueba inicial', function() {
   it('Prueba inicial', function() {
@@ -9,75 +12,84 @@ describe('Prueba inicial', function() {
 });
 
 describe('insertarCliente', function() {
-  it('insertarCliente', function() {
-    browser.get('http://localhost:4200/crear-cliente');
-    browser.sleep(3000);
+  let clientePage: ClientePage;
 
-    element(by.name('nombre')).sendKeys('Julian Test');
-    element(by.name('apellido')).sendKeys('Botero Test');
-    element(by.name('telefono')).sendKeys('5666804');
-    element(by.name('correo')).sendKeys('julian@hotmail.com');
-    element(by.name('cedula')).sendKeys('1045678');
-    browser.sleep(2000);
-    element(by.id('registrar')).click();
-    browser.sleep(2000);
+  beforeEach(() => {
+    clientePage = new ClientePage();
   });
-});
 
-describe('listarCliente', function() {
-  it('listarCliente', function() {
-    browser.get('http://localhost:4200/clientes');
-    expect(browser.getTitle()).toEqual('FutbolSiete');
-    browser.sleep(3000);
+  it('insertarCliente', function() {
+
+    clientePage.redirigirPaginaCrearCliente();
+    clientePage.pausaPrueba();
+
+    clientePage.ingresarNombre('JulianTest');
+    clientePage.ingresarApellido('Botero');
+    clientePage.ingresarTelefono('5666804');
+    clientePage.ingresarCorreo('julian@test.com');
+    clientePage.ingresarCedula('1223899');
+
+    clientePage.pausaPrueba();
+
+    clientePage.clickBotonCrear();
+
+    expect(browser.getCurrentUrl()).toEqual('http://localhost:4200/clientes');
+
+    clientePage.pausaPrueba();
+
   });
 });
 
 describe('insertarCancha', function() {
-  it('insertarCancha', function() {
-    browser.get('http://localhost:4200/crear-cancha');
-    browser.sleep(3000);
 
-    element(by.id('ubicacion')).sendKeys('El Carmen de Viboral Prueba Automatica');
-    element(by.id('cantidadJugadores')).sendKeys(7);
-    element(by.id('valorCancha')).sendKeys(75000);
-    browser.sleep(2000);
-    element(by.id('aceptar')).click();
-    browser.sleep(2000);
+  let canchaPage: CanchaPage;
+
+  beforeEach(() => {
+    canchaPage = new CanchaPage();
   });
-});
 
-describe('listarCancha', function() {
-  it('listarCancha', function() {
-    browser.get('http://localhost:4200/canchas');
-    expect(browser.getTitle()).toEqual('FutbolSiete');
-    browser.sleep(3000);
+  it('insertarCancha', function() {
+
+    canchaPage.redirigirPaginaCrearCancha();
+    canchaPage.pausaPrueba();
+
+    canchaPage.ingresarUbicacion('El Carmen de Viboral Prueba Automatica');
+    canchaPage.ingresarJugadores(7);
+    canchaPage.ingresarPrecio(75000);
+    canchaPage.pausaPrueba();
+
+    canchaPage.clickBotonCrear();
+
+    expect(browser.getCurrentUrl()).toEqual('http://localhost:4200/canchas');
+
+    canchaPage.pausaPrueba();
+    
   });
 });
 
 describe('insertarReserva', function() {
+
+  let reservaPage: ReservaPage;
+
+  beforeEach(() => {
+    reservaPage = new ReservaPage();
+  });
+
   it('insertarReserva', function() {
-    browser.get('http://localhost:4200/crear-reserva');
 
-    element(by.xpath('/html[1]/body[1]/app-root[1]/app-crear-reserva[1]/div[2]/form[1]/div[1]/div[1]/select[1]/option[1]')).click();
-    browser.sleep(3000);
-    element(by.xpath('/html[1]/body[1]/app-root[1]/app-crear-reserva[1]/div[2]/form[1]/div[1]/div[2]/select[1]/option[1]')).click();
-    browser.sleep(3000);
+    reservaPage.redirigirPaginaCrearReserva();
+    reservaPage.pausaPrueba();
 
-    element(by.id('fecha')).sendKeys('02/12/2020')
-    element(by.id('aceptar')).click();
+    reservaPage.clickSelectorCliente();
+    reservaPage.pausaPrueba();
+    reservaPage.clickSelectorCancha();
+    reservaPage.pausaPrueba();
+
+    reservaPage.clickBotonCrear();
+    expect(browser.getCurrentUrl()).toEqual('http://localhost:4200/reservas/crear-reserva');
+
+    reservaPage.pausaPrueba();
+
   });
 });
 
-describe('listarReserva', function() {
-  it('listarReserva', function() {
-    browser.get('http://localhost:4200/reservas');
-    expect(browser.getTitle()).toEqual('FutbolSiete');
-  });
-});
-
-describe('Prueba final', function() {
-  it('Prueba final', function() {
-    browser.get('http://localhost:4200/');
-    expect(browser.getTitle()).toEqual('FutbolSiete');
-  });
-});
